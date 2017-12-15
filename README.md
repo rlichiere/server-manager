@@ -35,6 +35,9 @@ Host and docker containers manager
   * split to dev/preprod/prod folders
   * adapt each docker-compose.yml
 
+## 0.0.2
+
+
 # Todo
 
 ## ContainerManager
