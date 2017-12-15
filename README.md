@@ -75,6 +75,7 @@ Host and docker containers manager
 * manage a configuration root
 
 ## Infra
+* manage complete backup in zip
 
 ## Implement Applications actions
 
