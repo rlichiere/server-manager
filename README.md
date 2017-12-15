@@ -25,6 +25,16 @@ Host and docker containers manager
 
 # Todo
 
+## Infra
+
+* use only 1 mysql & 1 phpmyadmin container
+  * check/modify all docker-compose.yml :
+    * use same mysql port everywhere
+    * add env.name for each database name
+* manage servermanager like django-chess app
+  * split to dev/preprod/prod folders
+  * adapt each docker-compose.yml
+  
 ## ContainerManager
 * define models
   * Configuration
