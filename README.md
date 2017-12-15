@@ -18,6 +18,10 @@ Host and docker containers manager
     * name
     * label
 * added home view
+* added front app
+  * added Readme view
+  * improved Applications view
+* improved urls repartition
 
 # Todo
 
