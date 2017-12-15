@@ -8,8 +8,10 @@
 
     Applications :
 <ul>
-    <li>App 1</li>
-    <li>App 2</li>
+    {% for app in context.applications %}
+    <li><b>{{ app.label }}</b> : <i>{{app.name}}</i> <button>Start</button> <button>Stop</button></li>
+    {% endfor %}
+    <li>App end.</li>
 </ul>
 
 </body>

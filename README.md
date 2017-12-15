@@ -26,7 +26,9 @@ Host and docker containers manager
   * Container
     * name
 
-    
+* create a generic app (or module ?) to centralize:
+  * container initialization commands (create_superuser, etc)
+
 
 ## HostManager
 * find interesting usages
