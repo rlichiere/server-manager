@@ -20,7 +20,7 @@ RUN pip install -r requirements.txt
 
 COPY . $APPDIR
 
-ENV DEBUG=False \
+ENV DEBUG='False' \
     DB_TYPE='sqlite' \
     DB_NAME='db' \
     DB_HOST='host' \

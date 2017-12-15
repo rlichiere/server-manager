@@ -24,7 +24,7 @@ class Config(object):
                                                   os.path.dirname(
                                                           os.path.dirname(
                                                                   os.path.dirname(os.path.abspath(__file__)))))
-        self._config['debug'] = os.environ.get('DEBUG', True)
+        self._config['debug'] = True if os.environ.get('DEBUG', 'True') == 'True' else False
         self._config['db_type'] = os.environ.get('DB_TYPE', 'sqlite')
         self._config['db_host'] = os.environ.get('DB_HOST', True)
         self._config['db_port'] = os.environ.get('DB_PORT', True)
