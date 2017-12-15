@@ -20,13 +20,19 @@ RUN pip install -r requirements.txt
 
 COPY . $APPDIR
 
-ENV DEBUG='False' \
-    DB_TYPE='sqlite' \
-    DB_NAME='db' \
+#ENV DEBUG='False' \
+#    DB_TYPE='sqlite' \
+#    DB_NAME='db' \
+#    DB_HOST='host' \
+#    DB_PORT='3306' \
+#    DB_USER='login' \
+#    DB_PASS='pass'
+
+ENV DB_NAME='db' \
     DB_HOST='host' \
     DB_PORT='3306' \
     DB_USER='login' \
-    DB_PASS='pass' \
+    DB_PASS='pass'
 
 
 COPY app-start.sh /app-start.sh
