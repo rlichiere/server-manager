@@ -37,8 +37,26 @@ Host and docker containers manager
 
 ## 0.0.2
 
+### ServerManager
+* added core app
+  * manages environment configuration
+  * manages static configuration
+  * manages dynamic configuration
+
+### Dockerfile
+* added ENV
+  * DB_TYPE: sqlite/mysql
+  * DEBUG: True/False
+
 
 # Todo
+
+## ServerManager
+* improve core app
+  * improve environment configuration
+  * improve static configuration
+  * improve dynamic configuration
+  * expose core utils (find examples)
 
 ## ContainerManager
 * manage database switch
