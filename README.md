@@ -27,12 +27,56 @@ Host and docker containers manager
 
 ## ContainerManager
 * define models
+  * Configuration
+    * projects_root
   * Container
     * name
 
 * create a generic app (or module ?) to centralize:
   * container initialization commands (create_superuser, etc)
 
+* manage database switch
+  * sqlite / mysql
+  * switchable with a configurable option
+
+* manage a configuration root
+
+## Implement Applications actions
+
+### User
+* Up
+* Down
+* Update
+* Promote
+
+### Maintenance
+* Pull
+* Build
+* Start
+* Stop
+* Remove
+
+## Implement Application's Containers actions
+
+### User
+* Up
+* Down
+* Update
+* Promote
+
+### Maintenance
+* Pull
+* Build
+* Start
+* Stop
+* Remove
 
 ## HostManager
 * find interesting usages
+  * list containers
+    * docker ps
+    * docker ps -a
+  * list images
+    * docker images
+    * docker images -a
+    
