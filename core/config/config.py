@@ -2,12 +2,16 @@
 import yaml
 import os
 
+import core.utils as core_utils
+
+
 class Config(object):
 
     def __init__(self):
 
         self._config = dict()
-        self._load_static_configuration()
+        self._load_environment_configuration()
+        self._load_file_configuration()
         # self._load_dynamic_configuration()
 
     def get(self, path, default=None):
@@ -17,7 +21,7 @@ class Config(object):
             return default
         return self._config[path]
 
-    def _load_static_configuration(self):
+    def _load_environment_configuration(self):
 
         # load environment configuration
         self._config['base_dir'] = os.environ.get('BASE_DIR',
@@ -25,12 +29,28 @@ class Config(object):
                                                           os.path.dirname(
                                                                   os.path.dirname(os.path.abspath(__file__)))))
         self._config['debug'] = True if os.environ.get('DEBUG', 'True') == 'True' else False
+        self._config['secret_key'] = os.environ.get('SECRET_KEY', core_utils.generate_secret_key())
         self._config['db_type'] = os.environ.get('DB_TYPE', 'sqlite')
-        self._config['db_host'] = os.environ.get('DB_HOST', True)
-        self._config['db_port'] = os.environ.get('DB_PORT', True)
-        self._config['db_user'] = os.environ.get('DB_USER', True)
-        self._config['db_pass'] = os.environ.get('DB_PASS', True)
-        self._config['db_name'] = os.environ.get('DB_NAME', True)
+        self._config['db_host'] = os.environ.get('DB_HOST', False)
+        self._config['db_port'] = os.environ.get('DB_PORT', False)
+        self._config['db_user'] = os.environ.get('DB_USER', False)
+        self._config['db_pass'] = os.environ.get('DB_PASS', False)
+        self._config['db_name'] = os.environ.get('DB_NAME', False)
+
+
+    def _load_file_configuration(self):
+        print('_load_file_configuration...')
+        def _replace_keys_from_file(data, file_path):
+            settings = yaml.load(open(file_path))
+            data.update(settings)
+
+        public_path = '%s/core/config/config.yml' % self._config['base_dir']
+        _replace_keys_from_file(self._config, public_path)
+
+        private_path = '%s/core/config/config_private.yml' % self._config['base_dir']
+        _replace_keys_from_file(self._config, private_path)
+
+        print('_load_file_configuration.')
 
     def _load_dynamic_configuration(self):
         # load configuration file

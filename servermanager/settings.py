@@ -16,23 +16,20 @@ from core.config.config import Config
 config = Config()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# print ('settings: OLD BASE_DIR : %s' % BASE_DIR)
-print ('settings: base_dir : %s' % config.get('base_dir', 'base_dir_not_found !'))
-
+print ('settings: base_dir : %s' % config.get('base_dir', 'base_dir not found !'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(wkh@2s^m6&hvjb9guo)f%56of#(==rp#qgyvtz$x8+9evj!wk'
+SECRET_KEY = config.get('secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG', False)
 DEBUG = config.get('debug', False)
+print ('settings: DEBUG : %s' % DEBUG)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = config.get('allowed_hosts', 'allowed_hosts not found !')
+print ('settings: ALLOWED_HOSTS : %s' % ALLOWED_HOSTS)
 
 # Application definition
 

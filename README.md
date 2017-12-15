@@ -42,6 +42,14 @@ Host and docker containers manager
   * manages environment configuration
   * manages static configuration
   * manages dynamic configuration
+* manage database switch sqlite/mysql
+* improved config so as 
+  * it is initialized by environment variables
+  * then it is updated from core/config/config.yml 
+  * then it is updated from core/config/config_private.yml 
+* manage allowed_hosts in config
+* manage secret_key in config
+* added core.utils
 
 ### Dockerfile
 * added ENV
@@ -53,13 +61,10 @@ Host and docker containers manager
 
 ## ServerManager
 * improve core app
-  * improve environment configuration
-  * improve static configuration
   * improve dynamic configuration
-  * expose core utils (find examples)
+  * improve core utils
 
 ## ContainerManager
-* manage database switch
   * sqlite / mysql
   * switchable with a configurable option
 

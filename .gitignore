@@ -34,4 +34,4 @@ local_settings.py
 # *.pyc
 .idea/*
 db.sqlite3
-core/config/settings_private.yml
+core/config/config_private.yml
