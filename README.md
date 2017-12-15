@@ -3,7 +3,10 @@ Host and docker containers manager
 
 
 # Release Notes
+
 ## 0.0.1
+
+### server-manager
 * created initial files
 * created main structure:
   * main app: servermanager
@@ -23,10 +26,7 @@ Host and docker containers manager
   * improved Applications view
 * improved urls repartition
 
-# Todo
-
-## Infra
-
+### Infra
 * use only 1 mysql & 1 phpmyadmin container
   * check/modify all docker-compose.yml :
     * use same mysql port everywhere
@@ -34,8 +34,14 @@ Host and docker containers manager
 * manage servermanager like django-chess app
   * split to dev/preprod/prod folders
   * adapt each docker-compose.yml
-  
+
+# Todo
+
 ## ContainerManager
+* manage database switch
+  * sqlite / mysql
+  * switchable with a configurable option
+
 * define models
   * Configuration
     * projects_root
@@ -45,11 +51,9 @@ Host and docker containers manager
 * create a generic app (or module ?) to centralize:
   * container initialization commands (create_superuser, etc)
 
-* manage database switch
-  * sqlite / mysql
-  * switchable with a configurable option
-
 * manage a configuration root
+
+## Infra
 
 ## Implement Applications actions
 
