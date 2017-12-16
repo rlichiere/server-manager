@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'core',
     'front',
     'containermanager',
@@ -148,4 +149,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+STATIC_ROOT = config.get('static_root')
+print('settings: STATIC_ROOT : %s' % STATIC_ROOT)
+
 STATIC_URL = '/static/'
+print('settings: STATIC_URL : %s' % STATIC_URL)
+
+# Login Redirect
+LOGIN_REDIRECT_URL = '/'

@@ -50,6 +50,8 @@ Host and docker containers manager
 * manage allowed_hosts in config
 * manage secret_key in config
 * added core.utils
+* solved temporarily a /static/ problem with --insecure option
+* added login/logout
 
 ### Dockerfile
 * added ENV

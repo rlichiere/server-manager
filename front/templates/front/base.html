@@ -11,44 +11,49 @@
 </head>
 <body>
 
-    <div class="container-fluid">
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <span class="navbar-brand"><strong>ServerManager</strong> {% block title %}{% endblock %}</span>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if request.user.is_superuser %}
-                        <li><a href="{% url "home" %}">Applications</a></li>
-                        <li><a href="{% url "readme" %}">Readme</a></li>
-                        {# <!--<li><a href="{% url "logout" %}">Logout</a></li>-->#}
-                        {# <!--<li><a data-toggle="modal" data-target="#ShowDocumentationModal" data-keyboard="false" href="{% url "documentation" %}">Documentation</a></li>-->#}
-                        {% endif %}
-                        <li><a href="/admin">Admin</a></li>
-                    </ul>
-                </div>
+<div class="container-fluid">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <span class="navbar-brand" style="display: flex;align-items: center;">
+                    <a class="navbar-brand" href="{% url 'home' %}"><strong>ServerManager</strong></a>
+                    {% block title %}{% endblock %}
+                </span>
             </div>
-        </nav>
-        <div id="ShowDocumentationModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_superuser %}
+                    <li><a href="{% url "home" %}">Applications</a></li>
+                    <li><a href="{% url "readme" %}">Readme</a></li>
+                    {# <!--<li><a data-toggle="modal" data-target="#ShowDocumentationModal" data-keyboard="false" href="{% url "documentation" %}">Documentation</a></li>-->#}
+                    <li><a href="/admin">Admin</a></li>
+                    <li><a href="{% url "front-logout" %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url "front-login" %}">Login</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </div>
-
-        {% block body %}{% endblock %}
+    </nav>
+    <div id="ShowDocumentationModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
     </div>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% block body %}{% endblock %}
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </body>
 </html>
