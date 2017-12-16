@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-from django.views.generic import View, TemplateView
 import models
 
 
-class ApplicationsView(TemplateView):
+class ApplicationsView(LoginRequiredMixin, TemplateView):
     template_name = 'applications/applications.html'
 
     def get_context_data(self, **kwargs):

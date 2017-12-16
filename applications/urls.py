@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-import views as container_mgr_views
+import views
 
 
 urlpatterns = [
-    url(r'^$', container_mgr_views.ApplicationsView.as_view(), name='home'),
+    url(r'^$', views.ApplicationsView.as_view(), name='home'),
 ]

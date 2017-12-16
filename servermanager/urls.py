@@ -17,4 +17,5 @@ from django.conf.urls import url, include
 
 urlpatterns = [
     url(r'', include('front.urls')),
+    url(r'', include('core.urls')),
 ]
