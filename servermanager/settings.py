@@ -12,21 +12,24 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+from core.config.config import Config
+config = Config()
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+print ('settings: base_dir : %s' % config.get('base_dir', 'base_dir not found !'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '(wkh@2s^m6&hvjb9guo)f%56of#(==rp#qgyvtz$x8+9evj!wk'
+SECRET_KEY = config.get('secret_key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config.get('debug', False)
+print ('settings: DEBUG : %s' % DEBUG)
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = config.get('allowed_hosts', 'allowed_hosts not found !')
+print ('settings: ALLOWED_HOSTS : %s' % ALLOWED_HOSTS)
 
 # Application definition
 
@@ -37,10 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
+    'core',
     'front',
     'containermanager',
     'hostmanager',
 ]
+
+# ANONYMOUS_USER_NAME = None
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,21 +83,35 @@ WSGI_APPLICATION = 'servermanager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': os.environ.get('DB_NAME'),
-    #     'HOST': os.environ.get('DB_HOST'),
-    #     'PORT': os.environ.get('DB_PORT'),
-    #     'USER': os.environ.get('DB_USER'),
-    #     'PASSWORD': os.environ.get('DB_PASS'),
-    # }
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+DATABASES = dict()
+if config.get('db_type') == 'sqlite':
+    print('settings: DATABASE use sqlite')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(config.get('base_dir'), 'db.sqlite3'),
+        }
     }
-}
-
+else:
+    print('settings: DATABASE use mysql')
+    DATABASES = {
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.mysql',
+        #     'NAME': os.environ.get('DB_NAME'),
+        #     'HOST': os.environ.get('DB_HOST'),
+        #     'PORT': os.environ.get('DB_PORT'),
+        #     'USER': os.environ.get('DB_USER'),
+        #     'PASSWORD': os.environ.get('DB_PASS'),
+        # }
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': config.get('db_host'),
+            'PORT': config.get('db_port'),
+            'USER': config.get('db_user'),
+            'PASSWORD': config.get('db_pass'),
+            'NAME': config.get('db_name'),
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -128,4 +149,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
+STATIC_ROOT = config.get('static_root')
+print('settings: STATIC_ROOT : %s' % STATIC_ROOT)
+
 STATIC_URL = '/static/'
+print('settings: STATIC_URL : %s' % STATIC_URL)
+
+# Login Redirect
+LOGIN_REDIRECT_URL = '/'
