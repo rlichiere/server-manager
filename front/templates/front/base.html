@@ -10,8 +10,7 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-
-<div class="container-fluid">
+<div>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -47,8 +46,9 @@
             </div>
         </div>
     </div>
-
-    {% block body %}{% endblock %}
+    <div class="container-fluid">
+        {% block body %}{% endblock %}
+    </div>
 </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

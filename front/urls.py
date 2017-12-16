@@ -23,10 +23,11 @@ import forms
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('containermanager.urls')),
-
+    url(r'^', include('applications.urls')),
     url(r'^readme$', views.ReadmeView.as_view(), name='readme'),
-    url(r'^login/$', auth_views.login, {'template_name': 'front/login.html',
+    url(r'^login/$',        auth_views.login, {'template_name': 'front/login.html',
+                                        'authentication_form': forms.FrontAuthForm}, name='front-login'),
+    url(r'^accounts/login', auth_views.login, {'template_name': 'front/login.html',
                                         'authentication_form': forms.FrontAuthForm}, name='front-login'),
     url(r'^logout/$', auth_views.logout, {'next_page': '/login'}, name='front-logout'),
 ]

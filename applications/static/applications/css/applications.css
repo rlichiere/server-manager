@@ -1,0 +1,12 @@
+
+.app-action-header, .app-action-header > span, .app-action-header > div > div, .app-action-block {
+    text-align: center;
+}
+
+.app-action-header {
+    margin-bottom: 15px;
+}
+
+.app-action-block > div, .app-action-block > a {
+    margin-bottom: 5px;
+}
