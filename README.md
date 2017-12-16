@@ -62,9 +62,11 @@ Host and docker containers manager
 
 ### ServerManager
 * renamed containermanager to applications
-
+* improved Applications panel
 
 # Todo
+* implement applications actions
+* implement application's containers actions
 
 ## ServerManager
 * improve core app

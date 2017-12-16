@@ -20,25 +20,41 @@
     <div class="col-lg-12">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <label class="panel-title">Actions</label>
+                <label class="panel-title">Applications Actions</label>
             </div>
             <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-2 app-action-header"><b>Application label</b></div>
+                    <div class="col-xs-2 app-action-header"><b>Application name</b></div>
+                    <div class="col-xs-2 app-action-header"><b>Application actions</b></div>
+                    <div class="col-xs-3 app-action-header"><b>Container name</b></div>
+                    <div class="col-xs-3 app-action-header"><b>Container actions</b></div>
+                </div>
                 {% for app in context.applications %}
                 <div class="row">
-                    <div class="col-xs-3 app-action-block"><b>{{ app.label }}</b></div>
-                    <div class="col-xs-3 app-action-block">
+                    <div class="col-xs-2 app-action-block"><b>{{ app.label }}</b></div>
+                    <div class="col-xs-2 app-action-block">
                         <i>{{app.name}}</i>
                         <div class="pull-right">
                             <a href="{{ app.git_repository_url }}" title="GIT" target="_blank" class="btn glyphicon glyphicon-link"></a>
                         </div>
                     </div>
-                    <div class="col-xs-6 app-action-block">
+                    <div class="col-xs-2 app-action-block">
+                        container_name
+                    </div>
+                    <div class="col-xs-3 app-action-block">
                         <a class="btn btn-primary">Pull</a>
                         <a class="btn btn-primary">Build</a>
-                        <a class="btn btn-primary">Up</a>
                         <a class="btn btn-primary">Start</a>
                         <a class="btn btn-primary">Stop</a>
-                        <a class="btn btn-primary">Down</a>
+                        <a class="btn btn-primary">Remove</a>
+                    </div>
+                    <div class="col-xs-3 app-action-block">
+                        <a class="btn btn-primary">Pull</a>
+                        <a class="btn btn-primary">Build</a>
+                        <a class="btn btn-primary">Start</a>
+                        <a class="btn btn-primary">Stop</a>
+                        <a class="btn btn-primary">Remove</a>
                     </div>
                 </div>
                 {% endfor %}
