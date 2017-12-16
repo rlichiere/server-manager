@@ -35,12 +35,39 @@ Host and docker containers manager
   * split to dev/preprod/prod folders
   * adapt each docker-compose.yml
 
+## 0.0.2
+
+### ServerManager
+* added core app
+  * manages environment configuration
+  * manages static configuration
+  * manages dynamic configuration
+* manage database switch sqlite/mysql
+* improved config so as 
+  * it is initialized by environment variables
+  * then it is updated from core/config/config.yml 
+  * then it is updated from core/config/config_private.yml 
+* manage allowed_hosts in config
+* manage secret_key in config
+* added core.utils
+* solved temporarily a /static/ problem with --insecure option
+* added login/logout
+
+### Dockerfile
+* added ENV
+  * DB_TYPE: sqlite/mysql
+  * DEBUG: True/False
+
+
 # Todo
 
+## ServerManager
+* improve core app
+  * improve dynamic configuration
+  * improve core utils
+
 ## ContainerManager
-* manage database switch
-  * sqlite / mysql
-  * switchable with a configurable option
+* rename containermanager to applicationmanager
 
 * define models
   * Configuration
@@ -54,6 +81,7 @@ Host and docker containers manager
 * manage a configuration root
 
 ## Infra
+* manage complete backup in zip
 
 ## Implement Applications actions
 

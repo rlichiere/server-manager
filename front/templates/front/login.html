@@ -1,0 +1,36 @@
+{% extends 'front/base.html' %}
+<!--{% load staticfiles %}-->
+{% load widget_tweaks %}
+
+{% block head_title %}Login{% endblock %}
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<div class="panel-body">
+    <div class="col-sm-4 col-sm-offset-4">
+        <br />
+        <br />
+        <br />
+        <form role="form" method="post" action="{% url 'front-login' %}">
+            {% csrf_token %}
+            <fieldset>
+                <div class="form-group">
+                    {% render_field form.username class+="form-control" placeholder="UserName" %}
+                </div>
+                <div class="form-group">
+                    {% render_field form.password class+="form-control" placeholder="Password" %}
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+            </fieldset>
+            {% if form.errors %}
+                <p style="color:red;">Username or password incorrect. Please try again.</p>
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}
