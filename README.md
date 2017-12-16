@@ -67,8 +67,7 @@ Host and docker containers manager
   * improve core utils
 
 ## ContainerManager
-  * sqlite / mysql
-  * switchable with a configurable option
+* rename containermanager to applicationmanager
 
 * define models
   * Configuration

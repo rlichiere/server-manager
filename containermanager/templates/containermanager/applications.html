@@ -1,6 +1,10 @@
 {% extends 'front/base.html' %}
 {% load static %}
 
+{% block head %}
+<link href="{% static 'containermanager/css/containermanager.css' %}" rel="stylesheet">
+{% endblock %}
+
 {% block head_title %}Applications{% endblock %}
 {% block title %}Applications{% endblock %}
 
@@ -20,20 +24,22 @@
             </div>
             <div class="panel-body">
                 {% for app in context.applications %}
-                <div class="col-xs-3"><b>{{ app.label }}</b></div>
-                <div class="col-xs-3">
-                    <i>{{app.name}}</i>
-                    <div class="pull-right">
-                        <a href="{{ app.git_repository_url }}" title="GIT" target="_blank" class="btn glyphicon glyphicon-link"></a>
+                <div class="row">
+                    <div class="col-xs-3 app-action-block"><b>{{ app.label }}</b></div>
+                    <div class="col-xs-3 app-action-block">
+                        <i>{{app.name}}</i>
+                        <div class="pull-right">
+                            <a href="{{ app.git_repository_url }}" title="GIT" target="_blank" class="btn glyphicon glyphicon-link"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <a class="btn btn-primary">Pull</a>
-                    <a class="btn btn-primary">Build</a>
-                    <a class="btn btn-primary">Up</a>
-                    <a class="btn btn-primary">Start</a>
-                    <a class="btn btn-primary">Stop</a>
-                    <a class="btn btn-primary">Down</a>
+                    <div class="col-xs-6 app-action-block">
+                        <a class="btn btn-primary">Pull</a>
+                        <a class="btn btn-primary">Build</a>
+                        <a class="btn btn-primary">Up</a>
+                        <a class="btn btn-primary">Start</a>
+                        <a class="btn btn-primary">Stop</a>
+                        <a class="btn btn-primary">Down</a>
+                    </div>
                 </div>
                 {% endfor %}
             </div>
