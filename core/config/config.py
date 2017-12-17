@@ -25,10 +25,9 @@ class Config(object):
     def get_basic_configuration(self):
         print('Config.get_basic_configuration...')
         conf = dict()
-        conf['base_dir'] = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace('\\','/')
         conf['debug'] = False
+        conf['base_dir'] = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace('\\','/')
         conf['static_root'] = '%s/static/' % conf['base_dir']
-        conf['secret_key'] = ''
         conf['db_type'] = 'sqlite'
         print('Config.get_basic_configuration.')
         return conf
@@ -37,7 +36,6 @@ class Config(object):
         print('Config.get_environment_configuration...')
         conf = dict()
 
-        # conf['base_dir'] = os.environ.get('BASE_DIR', self._config['base_dir'])
         _base_dir = os.environ.get('BASE_DIR', None)
         if _base_dir:
             conf['base_dir'] = _base_dir
@@ -50,37 +48,30 @@ class Config(object):
         if _static_root:
             conf['static_root'] = _static_root
 
-        # conf['secret_key'] = os.environ.get('SECRET_KEY', core_utils.generate_secret_key())
         _secret_key = os.environ.get('SECRET_KEY', None)
         if _secret_key:
             conf['secret_key'] = _secret_key
 
-        # conf['db_type'] = os.environ.get('DB_TYPE', self._config['db_type'])
         _db_type = os.environ.get('DB_TYPE', None)
         if _db_type:
             conf['db_type'] = _db_type
 
-        # conf['db_host'] = os.environ.get('DB_HOST', False)
         _db_host = os.environ.get('DB_HOST', None)
         if _db_host:
             conf['db_host'] = _db_host
 
-        # conf['db_port'] = os.environ.get('DB_PORT', False)
         _db_port = os.environ.get('DB_PORT', None)
         if _db_port:
             conf['db_port'] = _db_port
 
-        # conf['db_user'] = os.environ.get('DB_USER', False)
         _db_user = os.environ.get('DB_USER', None)
         if _db_user:
             conf['db_user'] = _db_user
 
-        # conf['db_pass'] = os.environ.get('DB_PASS', False)
         _db_pass = os.environ.get('DB_PASS', None)
         if _db_pass:
             conf['db_pass'] = _db_pass
 
-        # conf['db_name'] = os.environ.get('DB_NAME', False)
         _db_name = os.environ.get('DB_NAME', None)
         if _db_name:
             conf['db_name'] = _db_name
@@ -117,6 +108,6 @@ class Config(object):
     @property
     def get_config_file_list(self):
         return [
-            {'key': 'config',         'path': '%s/core/config/config.yml'         % self._config['base_dir']},
-            {'key': 'config_private', 'path': '%s/core/config/config_private.yml' % self._config['base_dir']},
+            {'key': 'config',         'path': '%s/core/config/config.yml'    % self._config['base_dir']},
+            {'key': 'config_private', 'path': '%s/config/config_private.yml' % self._config['base_dir']},
         ]

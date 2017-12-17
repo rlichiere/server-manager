@@ -33,6 +33,6 @@ local_settings.py
 # old stuff
 # *.pyc
 .idea/*
+config/*
 db.sqlite3
-core/config/config_private.yml
 static/*
