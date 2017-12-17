@@ -1,0 +1,80 @@
+{% load static %}
+
+<div class="col-lg-12">
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <label class="panel-title">{{ environment.label }} Applications</label>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-7 app-action-header">
+                    <span><b>Application label</b></span><br />
+                    <div class="row">
+                        <div class="col-sm-2"><b>Label</b></div>
+                        <div class="col-sm-3"><b>Name</b></div>
+                        <div class="col-sm-7"><b>Actions</b></div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-5 app-action-header">
+                    <span><b>Containers</b></span><br />
+                    <div class="row">
+                        <div class="col-sm-5 col-md-3"><b>Container name</b></div>
+                        <div class="col-sm-7 col-md-9"><b>Container actions</b></div>
+                    </div>
+                </div>
+            </div>
+            {% for app in context.applications %}
+            <div class="row">
+                <div class="col-sm-12 col-md-7">
+                    <div class="col-sm-4 col-md-2 app-action-block"><b>{{ app.label }}</b></div>
+                    <div class="col-sm-4 col-md-3 app-action-block">
+                        <i>{{app.name}}</i>
+                        <div class="pull-right">
+                            <a href="{{ app.git_repository_url }}" title="GIT" target="_blank" class="btn glyphicon glyphicon-link"></a>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-7">
+                        <div class="col-sm-4 col-md-3 app-action-block">User</div>
+                        <div class="col-sm-8 col-md-9 app-action-block">
+                            <a class="btn btn-xs btn-primary">Up</a>
+                            <a class="btn btn-xs btn-primary">Down</a>
+                            <a class="btn btn-xs btn-primary">Update</a>
+                            <a class="btn btn-xs btn-primary">Promote</a>
+                        </div>
+                        <div class="col-sm-4 col-md-3 app-action-block">Maintainer</div>
+                        <div class="col-sm-8 col-md-9 app-action-block">
+                            <a class="btn btn-xs btn-primary">Pull</a>
+                            <a class="btn btn-xs btn-primary">Build</a>
+                            <a class="btn btn-xs btn-primary">Start</a>
+                            <a class="btn btn-xs btn-primary">Stop</a>
+                            <a class="btn btn-xs btn-primary">Remove</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-5 app-action-block">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-3 app-action-block">container 1</div>
+                        <div class="col-sm-7 col-md-9 app-action-block">
+                            <a class="btn btn-xs btn-primary">Pull</a>
+                            <a class="btn btn-xs btn-primary">Build</a>
+                            <a class="btn btn-xs btn-primary">Start</a>
+                            <a class="btn btn-xs btn-primary">Stop</a>
+                            <a class="btn btn-xs btn-primary">Remove</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5 col-md-3 app-action-block">container 2</div>
+                        <div class="col-sm-7 col-md-9 app-action-block">
+                            <a class="btn btn-xs btn-primary">Pull</a>
+                            <a class="btn btn-xs btn-primary">Build</a>
+                            <a class="btn btn-xs btn-primary">Start</a>
+                            <a class="btn btn-xs btn-primary">Stop</a>
+                            <a class="btn btn-xs btn-primary">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

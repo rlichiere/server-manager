@@ -10,7 +10,7 @@ class ApplicationsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ApplicationsView, self).get_context_data(**kwargs)
 
-        apps = models.Application.objects.all()
-        context['applications'] = apps
+        context['applications'] = models.Application.objects.all()
+        context['environments'] = models.Environment.objects.all()
 
         return {'context': context}
