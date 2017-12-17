@@ -58,8 +58,15 @@ Host and docker containers manager
   * DB_TYPE: sqlite/mysql
   * DEBUG: True/False
 
+## 0.0.3
+
+### ServerManager
+* renamed containermanager to applications
+* improved Applications panel
 
 # Todo
+* implement applications actions
+* implement application's containers actions
 
 ## ServerManager
 * improve core app
@@ -67,7 +74,6 @@ Host and docker containers manager
   * improve core utils
 
 ## ContainerManager
-* rename containermanager to applicationmanager
 
 * define models
   * Configuration

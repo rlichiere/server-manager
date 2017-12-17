@@ -1,10 +1,8 @@
-from django.shortcuts import render
-
-from django.views.generic import View, TemplateView
-import models
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 
 
-class ReadmeView(TemplateView):
+class ReadmeView(LoginRequiredMixin, TemplateView):
     template_name = 'front/readme.html'
 
     def get_context_data(self, **kwargs):

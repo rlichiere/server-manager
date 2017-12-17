@@ -8,12 +8,8 @@ import core.utils as core_utils
 class Config(object):
 
     def __init__(self):
-
         self._config = dict()
-        self._load_basic_configuration()
-        self._load_environment_configuration()
-        self._load_file_configuration()
-        # self._load_dynamic_configuration()
+        self._load_complete_configuration()
 
     def get(self, path, default=None):
         if path not in self._config:
@@ -22,44 +18,96 @@ class Config(object):
             return default
         return self._config[path]
 
-    def _load_basic_configuration(self):
-        print('Config._load_basic_configuration...')
-        # self._config['base_dir'] = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-        self._config['base_dir'] = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace('\\','/')
-        self._config['debug'] = False
-        self._config['static_root'] = '%s/static/' % self._config['base_dir']
-        self._config['db_type'] = 'sqlite'
-        print('Config._load_basic_configuration.')
+    @property
+    def get_config(self):
+        return self._config
 
-    def _load_environment_configuration(self):
-        print('Config._load_environment_configuration...')
-        self._config['base_dir'] = os.environ.get('BASE_DIR', self._config['base_dir'])
-        self._config['debug'] = True if os.environ.get('DEBUG', 'True') == 'True' else self._config['debug']
-        self._config['static_root'] = os.environ.get('STATIC_ROOT', self._config['static_root'])
-        self._config['secret_key'] = os.environ.get('SECRET_KEY', core_utils.generate_secret_key())
-        self._config['db_type'] = os.environ.get('DB_TYPE', self._config['db_type'])
-        self._config['db_host'] = os.environ.get('DB_HOST', False)
-        self._config['db_port'] = os.environ.get('DB_PORT', False)
-        self._config['db_user'] = os.environ.get('DB_USER', False)
-        self._config['db_pass'] = os.environ.get('DB_PASS', False)
-        self._config['db_name'] = os.environ.get('DB_NAME', False)
-        print('Config._load_environment_configuration.')
+    def get_basic_configuration(self):
+        print('Config.get_basic_configuration...')
+        conf = dict()
+        conf['debug'] = False
+        conf['base_dir'] = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).replace('\\','/')
+        conf['static_root'] = '%s/static/' % conf['base_dir']
+        conf['db_type'] = 'sqlite'
+        print('Config.get_basic_configuration.')
+        return conf
 
-    def _load_file_configuration(self):
-        print('Config._load_file_configuration...')
+    def get_environment_configuration(self):
+        print('Config.get_environment_configuration...')
+        conf = dict()
 
-        def _replace_keys_from_file(data, file_path):
-            settings = yaml.load(open(file_path))
-            data.update(settings)
+        _base_dir = os.environ.get('BASE_DIR', None)
+        if _base_dir:
+            conf['base_dir'] = _base_dir
 
-        public_path = '%s/core/config/config.yml' % self._config['base_dir']
-        _replace_keys_from_file(self._config, public_path)
+        _debug = os.environ.get('DEBUG', None)
+        if _debug:
+            conf['debug'] = _debug
 
-        private_path = '%s/core/config/config_private.yml' % self._config['base_dir']
-        _replace_keys_from_file(self._config, private_path)
+        _static_root = os.environ.get('STATIC_ROOT', None)
+        if _static_root:
+            conf['static_root'] = _static_root
 
-        print('Config._load_file_configuration.')
+        _secret_key = os.environ.get('SECRET_KEY', None)
+        if _secret_key:
+            conf['secret_key'] = _secret_key
 
-    def _load_dynamic_configuration(self):
-        # load configuration file
-        pass
+        _db_type = os.environ.get('DB_TYPE', None)
+        if _db_type:
+            conf['db_type'] = _db_type
+
+        _db_host = os.environ.get('DB_HOST', None)
+        if _db_host:
+            conf['db_host'] = _db_host
+
+        _db_port = os.environ.get('DB_PORT', None)
+        if _db_port:
+            conf['db_port'] = _db_port
+
+        _db_user = os.environ.get('DB_USER', None)
+        if _db_user:
+            conf['db_user'] = _db_user
+
+        _db_pass = os.environ.get('DB_PASS', None)
+        if _db_pass:
+            conf['db_pass'] = _db_pass
+
+        _db_name = os.environ.get('DB_NAME', None)
+        if _db_name:
+            conf['db_name'] = _db_name
+
+        print('Config.get_environment_configuration.')
+        return conf
+
+    def get_file_configuration(self, file_path):
+        print('Config.get_file_configuration...')
+        conf = yaml.load(open(file_path))
+        print('Config.get_file_configuration.')
+        return conf
+
+    def get_files_configuration(self):
+        print('Config.get_files_configuration...')
+        conf = dict()
+        for conf_file in self.get_config_file_list:
+            conf.update(self.get_file_configuration(conf_file['path']))
+        print('Config.get_files_configuration.')
+        return conf
+
+    def get_database_configuration(self):
+        return dict()
+
+    def _load_complete_configuration(self):
+        self._config.update(self.get_basic_configuration())
+        self._config.update(self.get_environment_configuration())
+        self._config.update(self.get_files_configuration())
+        self._config.update(self.get_database_configuration())
+
+        if 'secret_key' not in self._config:
+            self._config['secret_key'] = core_utils.generate_secret_key()
+
+    @property
+    def get_config_file_list(self):
+        return [
+            {'key': 'config',         'path': '%s/core/config/config.yml'    % self._config['base_dir']},
+            {'key': 'config_private', 'path': '%s/config/config_private.yml' % self._config['base_dir']},
+        ]

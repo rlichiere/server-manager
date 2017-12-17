@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'core',
     'front',
-    'containermanager',
+    'applications',
     'hostmanager',
 ]
 
