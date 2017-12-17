@@ -36,3 +36,4 @@ local_settings.py
 config/*
 db.sqlite3
 static/*
+run.bat
