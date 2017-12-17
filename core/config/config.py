@@ -108,6 +108,6 @@ class Config(object):
     @property
     def get_config_file_list(self):
         return [
-            {'key': 'config',         'path': '%s/core/config/config.yml'         % self._config['base_dir']},
-            {'key': 'config_private', 'path': '%s/core/config/config_private.yml' % self._config['base_dir']},
+            {'key': 'config',         'path': '%s/core/config/config.yml'    % self._config['base_dir']},
+            {'key': 'config_private', 'path': '%s/config/config_private.yml' % self._config['base_dir']},
         ]

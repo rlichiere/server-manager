@@ -57,5 +57,20 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        var nav_bar = $('#navbar');
+        nav_bar.on('show.bs.collapse', function () {
+            console.log('ho show !');
+            nav_bar.firstElementChild.addClass('btn-group-vertical')
+        });
+        nav_bar.on('hide.bs.collapse', function () {
+            console.log('ho hide !');
+        });
+    });
+
+</script>
+
+{% block extra_script %}{% endblock %}
 </body>
 </html>
