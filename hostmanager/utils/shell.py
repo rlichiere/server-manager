@@ -1,3 +1,4 @@
+import os
 import subprocess
 
 from servermanager import settings
@@ -8,14 +9,20 @@ def get_free_memory():
     if settings.config.get('use_windows_host_profile'):
         cmd = 'wmic os get freephysicalmemory /format:value'
     try:
-        return execute_shell_cmd(cmd)
+        return execute_cmd(cmd)
     except Exception as e:
         print 'get_free_memory: ERROR : %s' % e.message
         return 'ERROR %s' % e.message
 
 
-def execute_shell_cmd(command, working_dir=None):
+def execute_cmd(command, working_dir=None, host_fqdn=None, host_port=None):
     print '_exec_cmd: command : %s' % command
+
+    if host_fqdn:
+        if not host_port:
+            host_port = settings.config.get('host_port', 22)
+        os.environ['DOCKER_HOST'] = "%s:%s" % (host_fqdn, host_port)
+
     if working_dir:
         print '_exec_cmd: working_dir : %s' % working_dir
         p = subprocess.Popen(command, cwd=working_dir, stdout=subprocess.PIPE, shell=True)

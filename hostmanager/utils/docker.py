@@ -9,13 +9,16 @@ class DockerCompose(object):
         self._path = '%s/projects/%s/%s' % (settings.config.get('base_dir'), environment.name, application.name)
 
     def up(self):
-        shell.execute_shell_cmd('docker-compose up', working_dir=self._path)
+        self._send_cmd('docker-compose up')
 
     def down(self):
-        shell.execute_shell_cmd('docker-compose down', working_dir=self._path)
+        self._send_cmd('docker-compose down')
 
     def start(self):
-        shell.execute_shell_cmd('docker-compose start', working_dir=self._path)
+        self._send_cmd('docker-compose start')
 
     def stop(self):
-        shell.execute_shell_cmd('docker-compose stop', working_dir=self._path)
+        self._send_cmd('docker-compose stop')
+
+    def _send_cmd(self, command):
+        shell.execute_cmd(command, working_dir=self._path, host_fqdn=settings.config.get('host_fqdn'))

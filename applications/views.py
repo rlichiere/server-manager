@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.views.generic import View, TemplateView
 
 import models
-
+from hostmanager.utils import docker
 
 class ApplicationsView(LoginRequiredMixin, TemplateView):
     template_name = 'applications/applications.html'
@@ -36,15 +36,20 @@ class ApplicationApi(LoginRequiredMixin, View):
         app = models.Application.objects.get(id=app_id)
 
         command = request.POST.get('command')
-        if command == 'up':
-            print 'ApplicationApi.post: %s up' % app
-            result['message'] = 'up ok.'
-        elif command == 'down':
-            print 'ApplicationApi.post: %s down' % app
-            result['message'] = 'down ok.'
-        else:
-            print 'ApplicationApi.post: unknown command : %s' % command
-            result['status'] = 'error'
-            result['message'] = 'unknown command.'
+        action = request.POST.get('action')
+        env_id = request.POST.get('env_id')
+        env = models.Environment.objects.get(id=env_id)
+        if command == 'application':
+            if action == 'up':
+                print 'ApplicationApi.post: %s up' % app
+                docker.DockerCompose(application=app, environment=env).up()
+                result['message'] = 'up ok.'
+            elif action == 'down':
+                print 'ApplicationApi.post: %s down' % app
+                result['message'] = 'down ok.'
+            else:
+                print 'ApplicationApi.post: unknown action : %s' % command
+                result['status'] = 'error'
+                result['message'] = 'unknown action.'
 
         return HttpResponse(json.dumps(result))

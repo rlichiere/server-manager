@@ -20,5 +20,5 @@ import views
 
 urlpatterns = [
     url(r'^$', views.ApplicationsView.as_view(), name='home'),
-    url(r'^api/applications/(?P<app_id>[0-9]+)/$', views.ApplicationApi.as_view(), name='application-api'),
+    url(r'^api/application/(?P<app_id>[0-9]+)/$', views.ApplicationApi.as_view(), name='api-application'),
 ]
