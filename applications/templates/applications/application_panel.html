@@ -44,11 +44,11 @@
                         </div>
                         <div class="col-sm-4 col-md-3 app-action-block">Maintainer</div>
                         <div class="col-sm-8 col-md-9 app-action-block">
-                            <a class="btn btn-xs btn-primary">Pull</a>
-                            <a class="btn btn-xs btn-primary">Build</a>
-                            <a class="btn btn-xs btn-primary">Start</a>
-                            <a class="btn btn-xs btn-primary">Stop</a>
-                            <a class="btn btn-xs btn-primary">Remove</a>
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='pull' action_label='Pull' %}
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='build' action_label='Build' %}
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='start' action_label='Start' %}
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='stop' action_label='Stop' %}
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='remove' action_label='Remove' %}
                         </div>
                     </div>
                 </div>
