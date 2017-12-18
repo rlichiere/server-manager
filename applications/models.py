@@ -11,6 +11,13 @@ class Application(models.Model):
     def __str__(self):
         return str(self.name)
 
+    @property
+    def jsonify(self):
+        return {
+            'name': self.name,
+            'label': self.label,
+            'git_repository_url': self.git_repository_url,
+        }
 
 class Environment(models.Model):
     name = models.CharField(max_length=50, blank=False)

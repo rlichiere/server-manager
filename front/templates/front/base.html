@@ -30,6 +30,7 @@
                 <div class="btn-group nav navbar-nav navbar-right">
                     {% if request.user.is_superuser %}
                     <a href="{% url "home" %}" class="btn btn-default">Applications</a>
+                    <a href="{% url "hostmanager" %}" class="btn btn-default">HostManager</a>
                     <a href="{% url "readme" %}" class="btn btn-default">Readme</a>
                     <a href="{% url "core-config" %}" class="btn btn-default">Config</a>
                     {# <!--<li><a data-toggle="modal" data-target="#ShowDocumentationModal" data-keyboard="false" href="{% url "documentation" %}">Documentation</a></li>-->#}

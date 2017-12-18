@@ -1,5 +1,6 @@
 {% load static %}
 
+{% if mode == 'body' %}
 <div class="col-lg-12">
     <div class="panel panel-info">
         <div class="panel-heading">
@@ -36,10 +37,10 @@
                     <div class="col-sm-6 col-md-7">
                         <div class="col-sm-4 col-md-3 app-action-block">User</div>
                         <div class="col-sm-8 col-md-9 app-action-block">
-                            <a class="btn btn-xs btn-primary">Up</a>
-                            <a class="btn btn-xs btn-primary">Down</a>
-                            <a class="btn btn-xs btn-primary">Update</a>
-                            <a class="btn btn-xs btn-primary">Promote</a>
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='up' action_label='Up' %}
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='down' action_label='Down' %}
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='update' action_label='Update' %}
+                            {% include 'applications/application_action_button.html' with app=app env=environment action_name='promote' action_label='Promote' %}
                         </div>
                         <div class="col-sm-4 col-md-3 app-action-block">Maintainer</div>
                         <div class="col-sm-8 col-md-9 app-action-block">
@@ -78,3 +79,12 @@
         </div>
     </div>
 </div>
+
+{% elif mode == 'extra_script' %}
+<!--EXTRA  {{ environment.label }} -->
+<script>
+    $(document).ready(function() {
+        $('#app_1')
+    });
+</script>
+{% endif %}

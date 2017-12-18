@@ -3,6 +3,8 @@
 
 {% block head %}
 <link href="{% static 'applications/css/applications.css' %}" rel="stylesheet">
+<script src="{% static 'front/js/front.js' %}"></script>
+
 {% endblock %}
 
 {% block head_title %}Applications{% endblock %}
@@ -10,8 +12,18 @@
 
 {% block body %}
 <div class="row">
+    <form>
+        {% csrf_token %}
+    </form>
     {% for env in context.environments %}
-        {% include 'applications/application_panel.html' with environment=env %}
+        {% include 'applications/application_panel.html' with environment=env mode='body' %}
     {% endfor %}
 </div>
+{% endblock %}
+
+{% block extra_script %}
+    {% for env in context.environments %}
+        {% include 'applications/application_panel.html' with environment=env mode='extra_script' %}
+    {% endfor %}
+
 {% endblock %}
