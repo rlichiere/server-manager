@@ -46,7 +46,36 @@ class ApplicationApi(LoginRequiredMixin, View):
                 result['message'] = 'up ok.'
             elif action == 'down':
                 print 'ApplicationApi.post: %s down' % app
+                docker.DockerCompose(application=app, environment=env).down()
                 result['message'] = 'down ok.'
+            elif action == 'update':
+                print 'ApplicationApi.post: %s update' % app
+                pass
+                result['message'] = 'update ok.'
+            elif action == 'promote':
+                print 'ApplicationApi.post: %s promote' % app
+                pass
+                result['message'] = 'promote ok.'
+            elif action == 'pull':
+                print 'ApplicationApi.post: %s pull' % app
+                pass
+                result['message'] = 'pull ok.'
+            elif action == 'build':
+                print 'ApplicationApi.post: %s build' % app
+                docker.DockerCompose(application=app, environment=env).build()
+                result['message'] = 'build ok.'
+            elif action == 'start':
+                print 'ApplicationApi.post: %s start' % app
+                docker.DockerCompose(application=app, environment=env).start()
+                result['message'] = 'start ok.'
+            elif action == 'stop':
+                print 'ApplicationApi.post: %s stop' % app
+                docker.DockerCompose(application=app, environment=env).stop()
+                result['message'] = 'stop ok.'
+            elif action == 'remove':
+                print 'ApplicationApi.post: %s remove' % app
+                pass
+                result['message'] = 'remove ok.'
             else:
                 print 'ApplicationApi.post: unknown action : %s' % action
                 result['status'] = 'error'
