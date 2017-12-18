@@ -13,6 +13,8 @@ function applicationAction(appId, envId, action) {
     };
     var url = '/api/application/' + appId + '/';
     $.post(url, post_data, function(data, status) {
-        console.log('applicationAction: done, data: ' + data);
+        console.log('applicationAction: done, data: ' + data + ', status: ' + status);
+        console.log('applicationAction: done, data.status: ' + data.status);
+        console.log('applicationAction: done, data.message: ' + data.message);
     }, 'json');
 }

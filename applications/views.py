@@ -36,10 +36,10 @@ class ApplicationApi(LoginRequiredMixin, View):
         app = models.Application.objects.get(id=app_id)
 
         command = request.POST.get('command')
-        action = request.POST.get('action')
-        env_id = request.POST.get('env_id')
-        env = models.Environment.objects.get(id=env_id)
         if command == 'application':
+            action = request.POST.get('action')
+            env_id = request.POST.get('env_id')
+            env = models.Environment.objects.get(id=env_id)
             if action == 'up':
                 print 'ApplicationApi.post: %s up' % app
                 docker.DockerCompose(application=app, environment=env).up()
@@ -48,8 +48,12 @@ class ApplicationApi(LoginRequiredMixin, View):
                 print 'ApplicationApi.post: %s down' % app
                 result['message'] = 'down ok.'
             else:
-                print 'ApplicationApi.post: unknown action : %s' % command
+                print 'ApplicationApi.post: unknown action : %s' % action
                 result['status'] = 'error'
                 result['message'] = 'unknown action.'
+        else:
+            print 'ApplicationApi.post: unknown command : %s' % command
+            result['status'] = 'error'
+            result['message'] = 'unknown command.'
 
         return HttpResponse(json.dumps(result))
